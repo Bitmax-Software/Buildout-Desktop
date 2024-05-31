@@ -1,0 +1,16 @@
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebScrapping.exe
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\selenium-manager\linux\selenium-manager
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\selenium-manager\macos\selenium-manager
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\selenium-manager\windows\selenium-manager.exe
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebScrapping.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebScrapping.deps.json
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebScrapping.runtimeconfig.json
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebScrapping.pdb
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\ClosedXML.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\DocumentFormat.OpenXml.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\ExcelNumberFormat.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\Irony.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\Newtonsoft.Json.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\WebDriver.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\SixLabors.Fonts.dll
+C:\Users\maxla\source\repos\WebScrapping\WebScrapping\bin\Release\net8.0-windows\publish\XLParser.dll

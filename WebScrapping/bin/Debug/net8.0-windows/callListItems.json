@@ -1,0 +1,326 @@
+[
+  {
+    "Id": "1410",
+    "Text": "2301 27th Avenue",
+    "Href": "call_lists/1410",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1409",
+    "Text": "71 Manchester Street",
+    "Href": "call_lists/1409",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1403",
+    "Text": "823 Russia Avenue, San Francisco, CA, USA",
+    "Href": "call_lists/1403",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1794",
+    "Text": "94116 Blackout",
+    "Href": "call_lists/1794",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1589",
+    "Text": "94124",
+    "Href": "call_lists/1589",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1474",
+    "Text": "94132 San Francisco",
+    "Href": "call_lists/1474",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1590",
+    "Text": "94133",
+    "Href": "call_lists/1590",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1729",
+    "Text": "Alameda 94501",
+    "Href": "call_lists/1729",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1851",
+    "Text": "Alameda 94501_050524",
+    "Href": "call_lists/1851",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1795",
+    "Text": "Alameda 94502",
+    "Href": "call_lists/1795",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1894",
+    "Text": "AROMAS 05112024",
+    "Href": "call_lists/1894",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1470",
+    "Text": "Atherton",
+    "Href": "call_lists/1470",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1818",
+    "Text": "Berkeley 04282024",
+    "Href": "call_lists/1818",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1412",
+    "Text": "Brisbane, CA, USA",
+    "Href": "call_lists/1412",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1892",
+    "Text": "CAMINO 05112024",
+    "Href": "call_lists/1892",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1632",
+    "Text": "Concord 500",
+    "Href": "call_lists/1632",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1411",
+    "Text": "East Palo Alto, CA, USA",
+    "Href": "call_lists/1411",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1891",
+    "Text": "ECHO LAKE 05112024",
+    "Href": "call_lists/1891",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1618",
+    "Text": "El Cerrito 03262024",
+    "Href": "call_lists/1618",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1683",
+    "Text": "El Dorado Hills 95762",
+    "Href": "call_lists/1683",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1360",
+    "Text": "Flood Avenue",
+    "Href": "call_lists/1360",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1682",
+    "Text": "Goleta 93117",
+    "Href": "call_lists/1682",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1890",
+    "Text": "GREENWOOD 05112024",
+    "Href": "call_lists/1890",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1897",
+    "Text": "GUADALUPE 05112024",
+    "Href": "call_lists/1897",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1631",
+    "Text": "Hercules",
+    "Href": "call_lists/1631",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1535",
+    "Text": "Hillsborough, CA 94010, USA",
+    "Href": "call_lists/1535",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1735",
+    "Text": "Hollister 95023",
+    "Href": "call_lists/1735",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1692",
+    "Text": "Hopland 95449",
+    "Href": "call_lists/1692",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1659",
+    "Text": "Kentfield",
+    "Href": "call_lists/1659",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1736",
+    "Text": "Laytonville 95454",
+    "Href": "call_lists/1736",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1896",
+    "Text": "LOMPOC 05112024",
+    "Href": "call_lists/1896",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1732",
+    "Text": "Novato 94945",
+    "Href": "call_lists/1732",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1690",
+    "Text": "Novato 94949",
+    "Href": "call_lists/1690",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1680",
+    "Text": "Occidental 95465",
+    "Href": "call_lists/1680",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1657",
+    "Text": "Pasadena 2",
+    "Href": "call_lists/1657",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1733",
+    "Text": "Penngrove 94951",
+    "Href": "call_lists/1733",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1889",
+    "Text": "PILOT HILL 05112024",
+    "Href": "call_lists/1889",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1804",
+    "Text": "Pleasanton 94588",
+    "Href": "call_lists/1804",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1893",
+    "Text": "PRUNEDALE 05112024",
+    "Href": "call_lists/1893",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1888",
+    "Text": "Rescue 05112024",
+    "Href": "call_lists/1888",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1734",
+    "Text": "Richmond 94801",
+    "Href": "call_lists/1734",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1691",
+    "Text": "Richmond 94805",
+    "Href": "call_lists/1691",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1717",
+    "Text": "San Bruno, CA",
+    "Href": "call_lists/1717",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1530",
+    "Text": "San Francisco, CA 94112, USA",
+    "Href": "call_lists/1530",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1489",
+    "Text": "San Francisco, CA 94131, USA",
+    "Href": "call_lists/1489",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1679",
+    "Text": "San Jose 95111",
+    "Href": "call_lists/1679",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1731",
+    "Text": "San Jose 95112",
+    "Href": "call_lists/1731",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1895",
+    "Text": "SEASIDE 05112024",
+    "Href": "call_lists/1895",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1913",
+    "Text": "SF 05162024",
+    "Href": "call_lists/1913",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1681",
+    "Text": "South San Francisco 94128",
+    "Href": "call_lists/1681",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1689",
+    "Text": "Sunol 94586",
+    "Href": "call_lists/1689",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1898",
+    "Text": "UKIAH 05112024",
+    "Href": "call_lists/1898",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1730",
+    "Text": "Union City 94587",
+    "Href": "call_lists/1730",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  },
+  {
+    "Id": "1693",
+    "Text": "Vernalis 95385",
+    "Href": "call_lists/1693",
+    "ExtractDateTime": "2024-05-29T03:38:28.8488828-05:00"
+  }
+]
