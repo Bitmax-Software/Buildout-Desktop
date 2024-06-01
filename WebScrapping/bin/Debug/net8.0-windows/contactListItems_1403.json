@@ -1,1 +1,242 @@
-[]
+[
+  {
+    "Text": "SANJA GAUTHIER",
+    "Id": "139020",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139020",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "YIN MA",
+    "Id": "139021",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139021",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "TAAHA HAQ",
+    "Id": "139022",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139022",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "ROSA RODRIGUEZ",
+    "Id": "139023",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139023",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "MICHAEL RIVERA",
+    "Id": "139024",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139024",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "DANIEL STERNFELD",
+    "Id": "139025",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139025",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "GEORGINA MORALES",
+    "Id": "139026",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139026",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "SANDRA CORTES",
+    "Id": "139027",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139027",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "XI CHEN",
+    "Id": "139028",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139028",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "MAUREEN CORTESE",
+    "Id": "139029",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139029",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "TRUYEN PHAN",
+    "Id": "139030",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139030",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "MICHAEL LAI",
+    "Id": "139031",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139031",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "berta morales",
+    "Id": "139032",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139032",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "EVELYN WAGONER",
+    "Id": "139033",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139033",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "DOUGLAS GUERRERO",
+    "Id": "139034",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139034",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "ANA RODRIGUEZ",
+    "Id": "139035",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139035",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "EDGAR RAMOS",
+    "Id": "139036",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139036",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "ROBERT EMERSON",
+    "Id": "139037",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139037",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "JESUS PEDROZA",
+    "Id": "139038",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139038",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "STEVEN GRESHAM",
+    "Id": "139039",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139039",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "DARREN CHOI",
+    "Id": "139040",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139040",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "JONATHAN WILKINSON",
+    "Id": "139041",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139041",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "JESUS CEDILLOS",
+    "Id": "139042",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139042",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "CHARLES PRIMICH",
+    "Id": "139043",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139043",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "ZHENLIU YU",
+    "Id": "139044",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139044",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "XIANGBIN ZENG",
+    "Id": "139045",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=139045",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "MICHAEL LATU",
+    "Id": "204745",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=204745",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "SALVADOR GARCIA",
+    "Id": "204749",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=204749",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "WILLIAM WHITE",
+    "Id": "204750",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=204750",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  },
+  {
+    "Text": "COLLIS HARRIS",
+    "Id": "204751",
+    "Address": null,
+    "ParentId": "1403",
+    "Href": "call_lists/1403/client_call_console?call_list_item_id=204751",
+    "ExtractDateTime": "2024-06-01T08:28:25.3253575-05:00"
+  }
+]

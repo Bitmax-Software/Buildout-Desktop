@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using static ClosedXML.Excel.XLPredefinedFormat;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace WebScrapping
 {
@@ -86,6 +89,35 @@ namespace WebScrapping
             LoadCallListItemsToDataGrid(path);
             CreateDataTable(contactListItems);
         }
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridView1.Rows.Count > 0)
+            {
+                var result = MessageBox.Show($"¿Está seguro que desea importar todos los contactos de cada contacto primario? ({dataGridView1.Rows.Count} contactos primarios)", "Importar de Buildout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        var item = new ContactListItem
+                        {
+                            Id = (string)row.Cells["Id"].Value,
+                            Text = (string)row.Cells["Primary Contact"].Value,
+                            ParentId = (string)row.Cells["ParentId"].Value,
+                            Href = (string)row.Cells["Href"].Value
+                        };
+
+                        var path = string.Format(_callListItemsDetailPath, item.ParentId, item.Id);
+                        List<DetailListItem> detailListItems = ExtractCallListContactsDetail(item);
+                        SaveDetailListItemsToJson(detailListItems, path);
+                    }
+                    MessageBox.Show("Datos importados exitosamente", "Importar de Buildout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            else { MessageBox.Show("Debe existir minimo un contacto primario para importar todos los datos", "Importar de Buildout", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -101,12 +133,17 @@ namespace WebScrapping
                 LoadDetailsInSecondDataGridView(path);
                 CreateDetailDataTable(detailListItems);
             }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un contacto primario para exportar los datos", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
         #endregion
 
         private List<CallListItem> ExtractCallListItems()
         {
             IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
             List<CallListItem> callListItems = new List<CallListItem>();
 
             try
@@ -166,12 +203,12 @@ namespace WebScrapping
             System.Threading.Thread.Sleep(5000);
         }
 
-        private void SwitchToCallListsFrame(IWebDriver driver, string waitElementId)
+        private void SwitchToCallListsFrame(IWebDriver driver, string waitElementId, string id = "")
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElement(By.CssSelector("iframe[src='https://prospect.buildout.com/call_lists']")));
+            wait.Until(d => d.FindElement(By.CssSelector($"iframe[src='https://prospect.buildout.com/call_lists{id}']")));
 
-            driver.SwitchTo().Frame(driver.FindElement(By.CssSelector("iframe[src='https://prospect.buildout.com/call_lists']")));
+            driver.SwitchTo().Frame(driver.FindElement(By.CssSelector($"iframe[src='https://prospect.buildout.com/call_lists{id}']")));
 
             wait.Until(d => d.FindElement(By.Id(waitElementId)));
         }
@@ -191,7 +228,7 @@ namespace WebScrapping
 
             } while (turboFrames.Count > previousCount);
 
-            var currentDateTime = DateTime.Now;
+            var currentDateTime = System.DateTime.Now;
 
             if (callListItems != null)
             {
@@ -261,13 +298,12 @@ namespace WebScrapping
             {
                 previousCount = turboFrames.Count;
                 js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(3000);
 
                 turboFrames = new List<IWebElement>(driver.FindElements(By.CssSelector($"#table_lists_regular_{callListId} tr")));
-                break;
             } while (turboFrames.Count > previousCount);
 
-            var currentDateTime = DateTime.Now;
+            var currentDateTime = System.DateTime.Now;
 
             if (contactListItem != null)
             {
@@ -310,35 +346,24 @@ namespace WebScrapping
         {
             List<ContactListItem> contactListItems = new List<ContactListItem>();
             IWebDriver driver = new ChromeDriver();
-
+            driver.Manage().Window.Maximize();
             try
             {
                 // Navega a la página de login y realiza el login
                 PerformLogin(driver);
 
                 // Navegar a la vista de Call Lists
-                NavigateToCallListsView(driver);
-
-                // Cambiar el contexto al iframe de la lista de llamadas
-                SwitchToCallListsFrame(driver, "call_lists_paginated_list");
-
-                // Scroll hasta el final de la página para cargar todos los elementos
-                ScrollToLoadAllItems(driver, null);
-
-                // Navegar a la vista Contact List
-                NavigateToCallListById(driver, selectedItem.Href);
-
-                // Cambiar de nuevo el contexto al contenido principal
-                driver.SwitchTo().DefaultContent();
+                NavigateToHrefAfterLogin(driver, $"https://buildout.com/connect/{selectedItem.Href}", $"#main_content");
 
                 // Cambiar el contexto al iframe de la lista de contactos
-                SwitchToCallListsFrame(driver, $"table_lists_regular_{selectedItem.Id}");
+                SwitchToCallListsFrame(driver, $"table_lists_regular_{selectedItem.Id}", $"/{selectedItem.Id}");
 
                 // Scroll hasta el final de la página para cargar todos los elementos
                 ScrollToLoadAllContactItems(driver, contactListItems, selectedItem.Id);
 
                 // Cambiar de nuevo el contexto al contenido principal
                 driver.SwitchTo().DefaultContent();
+
             }
             catch (NoSuchElementException ex)
             {
@@ -385,7 +410,7 @@ namespace WebScrapping
             if (tabIndex >= 0)
             {
                 dataTable.Columns.Add("Id", typeof(string));
-                dataTable.Columns.Add("Nombre", typeof(string));
+                dataTable.Columns.Add("Primary Contact", typeof(string));
                 dataTable.Columns.Add("Href", typeof(string));
                 dataTable.Columns.Add("ParentId", typeof(string));
 
@@ -400,6 +425,7 @@ namespace WebScrapping
 
                 // Hacer que las columnas "Id" y "Href" no sean visibles
                 dataGridView1.Columns["ParentId"].Visible = false;
+                dataGridView1.Columns["Href"].Visible = false;
 
 
                 dataGridView1.CellClick += dataGridView1_CellClick;
@@ -413,7 +439,7 @@ namespace WebScrapping
             {
                 // Obtén los datos de la fila seleccionada
                 string id = (string)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
-                string nombre = (string)dataGridView1.Rows[e.RowIndex].Cells["Nombre"].Value;
+                string nombre = (string)dataGridView1.Rows[e.RowIndex].Cells["Primary Contact"].Value;
                 string parentId = (string)dataGridView1.Rows[e.RowIndex].Cells["ParentId"].Value;
                 string href = (string)dataGridView1.Rows[e.RowIndex].Cells["Href"].Value;
 
@@ -461,10 +487,10 @@ namespace WebScrapping
             DataTable dataTable = new DataTable();
             if (tabIndex >= 0)
             {
-                dataTable.Columns.Add("Nombre", typeof(string));
+                dataTable.Columns.Add("Name", typeof(string));
                 dataTable.Columns.Add("Email", typeof(string));
-                dataTable.Columns.Add("Telefono", typeof(string));
-                dataTable.Columns.Add("Dirección", typeof(string));
+                dataTable.Columns.Add("Phone", typeof(string));
+                dataTable.Columns.Add("Address", typeof(string));
 
                 // Agregar la fila con los datos del objeto
                 foreach (var item in items)
@@ -476,14 +502,12 @@ namespace WebScrapping
             }
         }
 
-        public void NavigateToHrefAfterLogin(IWebDriver driver, string href)
+        public void NavigateToHrefAfterLogin(IWebDriver driver, string href, string waitElement)
         {
             // Navega a la URL almacenada en href
             driver.Navigate().GoToUrl(href);
-
-
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElement(By.CssSelector("a[href='/connect/call_lists']")));
+            wait.Until(d => d.FindElement(By.CssSelector($"{waitElement}")));
         }
         private void SwitchToDetailFrame(IWebDriver driver, string waitElementId, string href)
         {
@@ -503,7 +527,7 @@ namespace WebScrapping
 
             var turboFrames = new List<IWebElement>(driver.FindElements(By.CssSelector($"#console_ownership_list > turbo-frame")));
 
-            var currentDateTime = DateTime.Now;
+            var currentDateTime = System.DateTime.Now;
 
             if (detailListItem != null)
             {
@@ -629,13 +653,13 @@ namespace WebScrapping
         {
             List<DetailListItem> contactListItems = new List<DetailListItem>();
             IWebDriver driver = new ChromeDriver();
-
+            driver.Manage().Window.Maximize();
             try
             {
                 // Navega a la página de login y realiza el login
                 PerformLogin(driver);
 
-                NavigateToHrefAfterLogin(driver, $"https://buildout.com/connect/{selectedItem.Href}");
+                NavigateToHrefAfterLogin(driver, $"https://buildout.com/connect/{selectedItem.Href}", "a[href='/connect/call_lists']");
 
                 // Cambiar el contexto al iframe de la lista de contactos
                 SwitchToDetailFrame(driver, $"console_ownership_list_pagination", selectedItem.Href);
@@ -673,22 +697,36 @@ namespace WebScrapping
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // Obtener la ruta de la carpeta de descargas
-            string carpetaDescargas = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
-            // Nombre del archivo
-            string nombreArchivo = "DatosExportados.xlsx";
-            // Ruta completa del archivo
-            string rutaArchivo = Path.Combine(carpetaDescargas, nombreArchivo);
+            if (contactListItemSelected != null)
+            {
+                // Obtener la ruta de la carpeta de descargas
+                string carpetaDescargas = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
+                // Nombre del archivo
+                string nombreArchivo = $"{contactListItemSelected.Id}_{contactListItemSelected.Text}.xlsx";
+                // Ruta completa del archivo
+                string rutaArchivo = Path.Combine(carpetaDescargas, nombreArchivo);
 
-            ExportarDataGridViewAExcel(dataGridView2, rutaArchivo);
+                ExportarDataGridViewAExcel(dataGridView2, rutaArchivo);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un contacto primario para exportar los datos", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
 
         public void ExportarDataGridViewAExcel(DataGridView dataGridView, string rutaArchivo)
         {
+
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Hoja1");
+                var sheetName = $"{contactListItemSelected.Id}_{contactListItemSelected.Text}";
+                if (sheetName.Length > 31)
+                {
+                    sheetName = sheetName.Substring(0, 31);
+                }
+
+                var worksheet = workbook.Worksheets.Add(sheetName);
 
                 // Agregar encabezados de columna
                 for (int i = 0; i < dataGridView.Columns.Count; i++)
@@ -713,7 +751,104 @@ namespace WebScrapping
                 workbook.SaveAs(rutaArchivo);
             }
 
-            MessageBox.Show("Datos exportados exitosamente a Excel", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Datos exportados exitosamente a Excel ({rutaArchivo})", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private List<DetailListItem> GetAllContactsItems(string filePath)
+        {
+            List<DetailListItem> detailListItems;
+
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                detailListItems = JsonConvert.DeserializeObject<List<DetailListItem>>(json);
+            }
+            else
+            {
+                detailListItems = new List<DetailListItem>();
+            }
+            return detailListItems;
+        }
+
+        public void ExportarAllDataAExcel(DataGridView dataGridView, string rutaArchivo)
+        {
+
+            using (var workbook = new XLWorkbook())
+            {
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    var primaryContactText = dataGridView.Rows[i].Cells["Primary Contact"].Value.ToString();
+                    var IdText = dataGridView.Rows[i].Cells["Id"].Value.ToString();
+                    var sheetName = $"{IdText}_{primaryContactText}";
+                    if (sheetName.Length > 31)
+                    {
+                        sheetName = sheetName.Substring(0, 31);
+                    }
+                    var worksheet = workbook.Worksheets.Add(sheetName);
+
+                    var contactList = new ContactListItem
+                    {
+
+                        Id = IdText,
+                        Text = primaryContactText,
+                        ParentId = dataGridView.Rows[i].Cells["ParentId"].Value.ToString(),
+                        Href = dataGridView.Rows[i].Cells["Href"].Value.ToString()
+                    };
+
+                    var path = string.Format(_callListItemsDetailPath, contactList.ParentId, contactList.Id);
+                    var itemList = GetAllContactsItems(path);
+
+                    // Agregar encabezados de columna
+                    worksheet.Cell(1, 1).Value = "Name";
+                    worksheet.Cell(1, 2).Value = "Email";
+                    worksheet.Cell(1, 3).Value = "Phone";
+                    worksheet.Cell(1, 4).Value = "Address";
+
+                    // Agregar filas de datos
+                    for (int j = 0; j < itemList.Count; j++)
+                    {
+                        var item = itemList[j];
+                        worksheet.Cell(j + 2, 1).Value = item.Name;
+                        worksheet.Cell(j + 2, 2).Value = item.Email;
+                        worksheet.Cell(j + 2, 3).Value = item.Phone;
+                        worksheet.Cell(j + 2, 4).Value = item.Address;
+                    }
+                }
+                // Guardar el archivo Excel
+                workbook.SaveAs(rutaArchivo);
+            }
+
+            MessageBox.Show($"Datos exportados exitosamente a Excel ({rutaArchivo})", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                var result = MessageBox.Show($"¿Está seguro que desea exportar todos los contactos de cada contacto primario? ({dataGridView1.Rows.Count} contactos primarios)", "Exportar a Excel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    CallListItem selectedItem = (CallListItem)comboBox1.SelectedItem;
+
+                    // Obtener la ruta de la carpeta de descargas
+                    string carpetaDescargas = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
+                    // Nombre del archivo
+                    string nombreArchivo = $"{selectedItem.Text}.xlsx";
+                    // Ruta completa del archivo
+                    string rutaArchivo = Path.Combine(carpetaDescargas, nombreArchivo);
+
+                    ExportarAllDataAExcel(dataGridView1, rutaArchivo);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe existir minimo un contacto primario para exportar los datos", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
