@@ -4873,9 +4873,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\WebScrapping.csproj",
-      "projectName": "WebScrapping",
-      "projectPath": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\WebScrapping.csproj",
+      "projectUniqueName": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\Buildout Desktop.csproj",
+      "projectName": "Buildout Desktop",
+      "projectPath": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\Buildout Desktop.csproj",
       "packagesPath": "C:\\Users\\Rodrigo\\.nuget\\packages\\",
       "outputPath": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\obj\\",
       "projectStyle": "PackageReference",

@@ -13,6 +13,7 @@ using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using static ClosedXML.Excel.XLPredefinedFormat;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.VisualBasic;
 
 namespace WebScrapping
 {
@@ -80,6 +81,11 @@ namespace WebScrapping
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedIndex < 0)
+            {
+               MessageBox.Show("Debe seleccionar una lista de llamadas para importar los contactos primarios", "Importar de Buildout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Obtener el elemento seleccionado en el ComboBox
             CallListItem selectedItem = (CallListItem)comboBox1.SelectedItem;
             var path = string.Format(_contactListItemsPath, selectedItem.Id);

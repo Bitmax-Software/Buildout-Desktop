@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DlufM61L94athZMHFaS5e0ndHxp6kH9ACBrzfM3Dl7u39Kkxcmjwx6l2m+EAF3k+8KdVyTNy1+xosy47RjBmeg==",
+  "dgSpecHash": "b801UHQ+Dw3qdKDXZEenN/TT9CZcfAm1Z5cfpwyjMvNCRLuH26t/Dfnd3t7j4PSL2Ibza97+e07l50WZUs9Ymw==",
   "success": true,
-  "projectFilePath": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\WebScrapping.csproj",
+  "projectFilePath": "D:\\Users\\Rodrigo\\Documents\\GitHub\\Buildout-Desktop\\WebScrapping\\Buildout Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rodrigo\\.nuget\\packages\\closedxml\\0.102.2\\closedxml.0.102.2.nupkg.sha512",
     "C:\\Users\\Rodrigo\\.nuget\\packages\\documentformat.openxml\\2.16.0\\documentformat.openxml.2.16.0.nupkg.sha512",
