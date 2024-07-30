@@ -14,6 +14,7 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using static ClosedXML.Excel.XLPredefinedFormat;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.VisualBasic;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
 namespace WebScrapping
 {
@@ -83,7 +84,7 @@ namespace WebScrapping
         {
             if (comboBox1.SelectedIndex < 0)
             {
-               MessageBox.Show("Debe seleccionar una lista de llamadas para importar los contactos primarios", "Importar de Buildout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar una lista de llamadas para importar los contactos primarios", "Importar de Buildout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             // Obtener el elemento seleccionado en el ComboBox
@@ -306,7 +307,7 @@ namespace WebScrapping
                 js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
                 System.Threading.Thread.Sleep(3000);
 
-                turboFrames = new List<IWebElement>(driver.FindElements(By.CssSelector($"#table_lists_regular_{callListId} tr")));
+                turboFrames = new List<IWebElement>(driver.FindElements(By.CssSelector($"#table_call_list_{callListId} tr")));
             } while (turboFrames.Count > previousCount);
 
             var currentDateTime = System.DateTime.Now;
@@ -315,35 +316,43 @@ namespace WebScrapping
             {
                 foreach (var frame in turboFrames)
                 {
-                    string paragraphText = "";
                     try
                     {
-                        var aText = frame.FindElement(By.CssSelector("a.clickable"));
-                        paragraphText = aText.Text;
+
+                        string paragraphText = "";
+                        try
+                        {
+                            var aText = frame.FindElement(By.CssSelector("a.clickable"));
+                            paragraphText = aText.Text;
+                        }
+                        catch
+                        {
+                        }
+
+
+                        var id = frame.GetAttribute("id");
+                        var idFormated = id.Replace("call_list_item_", string.Empty);
+
+                        var a = frame.FindElement(By.CssSelector("a.btn-icon"));
+                        var href = a.GetAttribute("href");
+                        // Convertir el URL absoluto a relativo si es necesario
+                        Uri baseUri = new Uri("https://prospect.buildout.com");
+                        Uri hrefUri = new Uri(href);
+                        string relativeHref = baseUri.MakeRelativeUri(hrefUri).ToString();
+
+                        contactListItem.Add(new ContactListItem
+                        {
+                            Text = paragraphText,
+                            Id = idFormated,
+                            Href = relativeHref,
+                            ExtractDateTime = currentDateTime,
+                            ParentId = callListId
+                        });
                     }
-                    catch (NoSuchElementException)
+                    catch
                     {
+                        Console.WriteLine("No se encontró el elemento");
                     }
-
-
-                    var id = frame.GetAttribute("id");
-                    var idFormated = id.Replace("call_list_item_", string.Empty);
-
-                    var a = frame.FindElement(By.CssSelector("a.btn-icon"));
-                    var href = a.GetAttribute("href");
-                    // Convertir el URL absoluto a relativo si es necesario
-                    Uri baseUri = new Uri("https://prospect.buildout.com");
-                    Uri hrefUri = new Uri(href);
-                    string relativeHref = baseUri.MakeRelativeUri(hrefUri).ToString();
-
-                    contactListItem.Add(new ContactListItem
-                    {
-                        Text = paragraphText,
-                        Id = idFormated,
-                        Href = relativeHref,
-                        ExtractDateTime = currentDateTime,
-                        ParentId = callListId
-                    });
                 }
             }
         }
@@ -362,7 +371,7 @@ namespace WebScrapping
                 NavigateToHrefAfterLogin(driver, $"https://buildout.com/connect/{selectedItem.Href}", $"#main_content");
 
                 // Cambiar el contexto al iframe de la lista de contactos
-                SwitchToCallListsFrame(driver, $"table_lists_regular_{selectedItem.Id}", $"/{selectedItem.Id}");
+                SwitchToCallListsFrame(driver, $"table_call_list_{selectedItem.Id}", $"/{selectedItem.Id}");
 
                 // Scroll hasta el final de la página para cargar todos los elementos
                 ScrollToLoadAllContactItems(driver, contactListItems, selectedItem.Id);
@@ -523,6 +532,8 @@ namespace WebScrapping
             driver.SwitchTo().Frame(driver.FindElement(By.CssSelector($"iframe[src='https://prospect.buildout.com/{href}']")));
 
             wait.Until(d => d.FindElement(By.Id(waitElementId)));
+            System.Threading.Thread.Sleep(1000); // Espera 1 segundo
+
         }
 
         private void ScrollToLoadAllContactDetailItems(IWebDriver driver, List<DetailListItem>? detailListItem, int page)
@@ -539,28 +550,57 @@ namespace WebScrapping
             {
                 foreach (var frame in turboFrames)
                 {
-                    var showMoreButtons = frame.FindElements(By.CssSelector("a[href*='show_more']"));
+                    var collapsedElements = frame.FindElements(By.CssSelector("div.collapsed[data-bs-toggle='collapse']"));
+
+                    foreach (var element in collapsedElements)
+                    {
+                        var elementText = string.Empty;
+                        try
+                        {
+                            elementText = element.FindElement(By.CssSelector("strong")).Text;
+                        }
+                        catch
+                        {
+                            elementText = "NO NAME";
+                        }
+
+                        if (!elementText.Contains("Relationships"))
+                        {
+                            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+                            executor.ExecuteScript("arguments[0].click();", element);
+                            System.Threading.Thread.Sleep(1000); // Espera 1 segundo entre clics
+                        }
+                    }
+
+                    // Encuentra todos los elementos <a> que tienen la clase 'fw-bold collapsable-toggle'
+                    var showMoreButtons = frame.FindElements(By.CssSelector("a.fw-bold.collapsable-toggle"));
 
                     foreach (var button in showMoreButtons)
                     {
-                        IJavaScriptExecutor ex = (IJavaScriptExecutor)driver;
-                        ex.ExecuteScript("arguments[0].click();", button);
-                        System.Threading.Thread.Sleep(1000);
+                        // Verifica si el texto "Show More" está presente
+                        var showMoreText = button.FindElement(By.CssSelector("div.show-collapsed")).Text;
+                        if (showMoreText.Contains("Show More"))
+                        {
+                            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+                            executor.ExecuteScript("arguments[0].click();", button);
+                            System.Threading.Thread.Sleep(1000); // Espera 1 segundo entre clics
+                        }
                     }
 
                     string name = "";
                     try
                     {
-                        var aText = frame.FindElement(By.TagName("h5"));
-                        name = aText.Text;
+                        // Encuentra el elemento <div> que tiene las clases 'fs-large fw-bold'
+                        var nameElement = frame.FindElement(By.CssSelector("div.fs-large.fw-bold"));
+                        name = nameElement.Text;
                     }
                     catch (NoSuchElementException)
                     {
-
+                        // Manejar la excepción si el elemento no se encuentra
+                        Console.WriteLine("El elemento con el nombre no fue encontrado.");
                     }
 
-                    List<string> phones = new List<string>();
-
+                    var phones = new List<string>();
                     try
                     {
                         var htmlPhones = frame.FindElements(By.CssSelector("a[href^='tel:']"));
@@ -570,48 +610,39 @@ namespace WebScrapping
                     {
 
                     }
+                    phones = phones.Where(p => !string.IsNullOrWhiteSpace(p)).ToList();
 
-                    List<string> emails = new List<string>();
-
+                    var emails = new List<string>();
                     try
                     {
-                        var htmlEmailContainer = frame.FindElement(By.CssSelector("[id*='_email_addresses']"));
-                        var htmlEmails = htmlEmailContainer.FindElements(By.TagName("a"));
-                        emails = htmlEmails.Select(p => p.Text).ToList();
+                        // Encuentra todos los elementos <a> con la clase 'text-truncate'
+                        var htmlEmailElements = frame.FindElements(By.CssSelector("a.text-truncate"));
+
+                        // Extrae el texto del <div> dentro de cada <turbo-frame> encontrado
+                        emails = htmlEmailElements.Select(p => p.FindElement(By.CssSelector("turbo-frame div.fw-normal")).Text).ToList();
                     }
                     catch (NoSuchElementException)
                     {
-
+                        // Manejar la excepción si el elemento no se encuentra
+                        Console.WriteLine("No se encontraron elementos de correo electrónico.");
                     }
+                    emails = emails.Where(p => !string.IsNullOrWhiteSpace(p)).ToList();
 
-                    List<string> addresses = new List<string>();
-
+                    var addresses = new List<string>();
                     try
                     {
-                        var htmlAddressContainers = frame.FindElements(By.CssSelector("[id*='_addresses']"));
-                        var htmlAddressContainer = htmlAddressContainers.Reverse().FirstOrDefault();
-                        if (htmlAddressContainer != null)
-                        {
-                            var htmlAddresses = htmlAddressContainer.FindElements(By.TagName("p"));
+                        // Encuentra todos los elementos <turbo-frame> cuyo id empieza con 'info_address'
+                        var htmlAddressElements = frame.FindElements(By.CssSelector("turbo-frame[id^='info_address'] div"));
 
-                            for (int i = 0; i < htmlAddresses.Count; i += 2)
-                            {
-                                if (i + 1 < htmlAddresses.Count)
-                                {
-                                    addresses.Add($"{htmlAddresses[i].Text}, {htmlAddresses[i + 1].Text}");
-                                }
-                                else
-                                {
-                                    addresses.Add(htmlAddresses[i].Text);
-                                }
-                            }
-
-                        }
+                        // Extrae el texto del <div> dentro de cada <turbo-frame> encontrado
+                        addresses = htmlAddressElements.Select(p => p.Text).ToList();
                     }
                     catch (NoSuchElementException)
                     {
-
+                        // Manejar la excepción si el elemento no se encuentra
+                        Console.WriteLine("No se encontraron elementos de dirección.");
                     }
+                    addresses = addresses.Where(p => !string.IsNullOrWhiteSpace(p)).ToList();
 
                     var phonescount = phones.Count;
                     var emailscount = emails.Count;
@@ -688,6 +719,9 @@ namespace WebScrapping
                 driver.Quit();
             }
 
+            //If Phone or Email is empty not consider it in the neww list
+            contactListItems = contactListItems.Where(l => !string.IsNullOrWhiteSpace(l.Phone) || !string.IsNullOrWhiteSpace(l.Email)).ToList();
+
             return contactListItems.ToList();
         }
         private void NavigateToCallListById(IWebDriver driver, string href)
@@ -721,44 +755,55 @@ namespace WebScrapping
         }
 
 
-        public void ExportarDataGridViewAExcel(DataGridView dataGridView, string rutaArchivo)
+        
+        // Función para verificar si el archivo está en uso
+        private bool IsFileLocked(string filePath)
         {
-
-            using (var workbook = new XLWorkbook())
+            try
             {
-                var sheetName = $"{contactListItemSelected.Id}_{contactListItemSelected.Text}";
-                if (sheetName.Length > 31)
+                using (FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
                 {
-                    sheetName = sheetName.Substring(0, 31);
+                    stream.Close();
                 }
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            return false;
+        }
 
-                var worksheet = workbook.Worksheets.Add(sheetName);
+        // Guardar el archivo Excel con verificación y reintento
+        private void SaveExcelFile(string rutaArchivo, XLWorkbook? workbook)
+        {
+            int maxRetries = 3;
+            int delay = 1000; // milisegundos
 
-                // Agregar encabezados de columna
-                for (int i = 0; i < dataGridView.Columns.Count; i++)
+            for (int retry = 0; retry < maxRetries; retry++)
+            {
+                if (!IsFileLocked(rutaArchivo))
                 {
-                    worksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
-                }
-
-                // Agregar filas de datos
-                for (int i = 0; i < dataGridView.Rows.Count; i++)
-                {
-                    for (int j = 0; j < dataGridView.Columns.Count; j++)
+                    try
                     {
-                        var cellValue = dataGridView.Rows[i].Cells[j].Value;
-                        if (cellValue != null)
-                        {
-                            worksheet.Cell(i + 2, j + 1).Value = cellValue.ToString();
-                        }
+                        workbook.SaveAs(rutaArchivo);
+                        MessageBox.Show($"Datos exportados exitosamente a Excel ({rutaArchivo})", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show($"Error al guardar el archivo: {ex.Message}");
+                        return;
                     }
                 }
-
-                // Guardar el archivo Excel
-                workbook.SaveAs(rutaArchivo);
+                else
+                {
+                    Thread.Sleep(delay); // Esperar antes de reintentar
+                }
             }
 
-            MessageBox.Show($"Datos exportados exitosamente a Excel ({rutaArchivo})", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("No se pudo guardar el archivo. Está siendo utilizado por otro proceso.");
         }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -781,55 +826,160 @@ namespace WebScrapping
             return detailListItems;
         }
 
-        public void ExportarAllDataAExcel(DataGridView dataGridView, string rutaArchivo)
+        public void ExportarDataGridViewAExcel(DataGridView dataGridView, string rutaArchivo)
         {
+            var dateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
 
             using (var workbook = new XLWorkbook())
             {
+                var sheetName = $"All Data {dateTime}";
+
+                if (sheetName.Length > 31)
+                    sheetName = sheetName.Substring(0, 31);
+
+                var worksheet = workbook.Worksheets.Add(sheetName);
+                var onlyEmailworksheet = workbook.Worksheets.Add("Only Emails");
+                var completeDataWorksheet = workbook.Worksheets.Add("Complete Data");
+
+                // Agregar encabezados de columna
+                for (int i = 0; i < dataGridView.Columns.Count; i++)
+                {
+                    worksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    worksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    worksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+
+                    onlyEmailworksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    onlyEmailworksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    onlyEmailworksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+
+                    completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                }
+
+                int emailRowCounter = 2; // Contador para las filas de la hoja de emails
+                int phoneRowCounter = 2; // Contador para las filas de la hoja de teléfonos
+
+                // Agregar filas de datos
+                // 0 - Name
+                // 1 - Email
+                // 2 - Phone
+                // 3 - Address
+
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
-                    var primaryContactText = dataGridView.Rows[i].Cells["Primary Contact"].Value.ToString();
-                    var IdText = dataGridView.Rows[i].Cells["Id"].Value.ToString();
-                    var sheetName = $"{IdText}_{primaryContactText}";
-                    if (sheetName.Length > 31)
-                    {
-                        sheetName = sheetName.Substring(0, 31);
-                    }
-                    var worksheet = workbook.Worksheets.Add(sheetName);
+                    var row = dataGridView.Rows[i];
+                    var rowHasEmail = row.Cells[1].Value != null && !string.IsNullOrWhiteSpace(row.Cells[1].Value.ToString());
+                    var rowHasPhone = row.Cells[2].Value != null && !string.IsNullOrWhiteSpace(row.Cells[2].Value.ToString());
 
+                    for (int j = 0; j < dataGridView.Columns.Count; j++)
+                    {
+                        var cellValue = row.Cells[j].Value?.ToString();
+
+                        // Insert data to the complete data sheet
+                        if (!string.IsNullOrEmpty(cellValue))
+                        {
+                            worksheet.Cell(i + 2, j + 1).Value = cellValue;
+
+                            // Insertar datos en la hoja solo de email si tiene email
+                            if (rowHasEmail)
+                            {
+                                onlyEmailworksheet.Cell(emailRowCounter, j + 1).Value = cellValue;
+                            }
+
+                            // Insertar datos en la hoja solo de teléfono si tiene teléfono
+                            if (rowHasPhone)
+                            {
+                                completeDataWorksheet.Cell(phoneRowCounter, j + 1).Value = cellValue;
+                            }
+                        }
+                    }
+
+                    // Incrementar los contadores de filas sólo si la fila tiene email o teléfono
+                    if (rowHasEmail)
+                    {
+                        emailRowCounter++;
+                    }
+                    if (rowHasPhone)
+                    {
+                        phoneRowCounter++;
+                    }
+                }
+
+                // Guardar el archivo Excel
+                SaveExcelFile(rutaArchivo, workbook);
+            }
+        }
+
+        public void ExportarAllDataAExcel(DataGridView dataGridView, string rutaArchivo)
+        {
+            var dateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+
+            using (var workbook = new XLWorkbook())
+            {
+                var sheetName = $"All Data {dateTime}".Substring(0, Math.Min(31, $"All Data {dateTime}".Length));
+
+                var worksheet = workbook.Worksheets.Add(sheetName);
+                var onlyEmailWorksheet = workbook.Worksheets.Add("Only Emails");
+                var completeDataWorksheet = workbook.Worksheets.Add("Complete Data");
+
+                // Encabezados de columna
+                string[] headers = { "Name", "Email", "Phone", "Address" };
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    worksheet.Cell(1, i + 1).Value = headers[i];
+                    onlyEmailWorksheet.Cell(1, i + 1).Value = headers[i];
+                    completeDataWorksheet.Cell(1, i + 1).Value = headers[i];
+                }
+
+                var data = new List<DetailListItem>();
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    var row = dataGridView.Rows[i];
                     var contactList = new ContactListItem
                     {
-
-                        Id = IdText,
-                        Text = primaryContactText,
-                        ParentId = dataGridView.Rows[i].Cells["ParentId"].Value.ToString(),
-                        Href = dataGridView.Rows[i].Cells["Href"].Value.ToString()
+                        Id = row.Cells["Id"].Value.ToString(),
+                        Text = row.Cells["Primary Contact"].Value.ToString(),
+                        ParentId = row.Cells["ParentId"].Value.ToString(),
+                        Href = row.Cells["Href"].Value.ToString()
                     };
 
                     var path = string.Format(_callListItemsDetailPath, contactList.ParentId, contactList.Id);
-                    var itemList = GetAllContactsItems(path);
+                    data.AddRange(GetAllContactsItems(path));
+                }
 
-                    // Agregar encabezados de columna
-                    worksheet.Cell(1, 1).Value = "Name";
-                    worksheet.Cell(1, 2).Value = "Email";
-                    worksheet.Cell(1, 3).Value = "Phone";
-                    worksheet.Cell(1, 4).Value = "Address";
+                int emailRowCounter = 2;
+                int phoneRowCounter = 2;
 
-                    // Agregar filas de datos
-                    for (int j = 0; j < itemList.Count; j++)
+                for (int j = 0; j < data.Count; j++)
+                {
+                    var item = data[j];
+                    worksheet.Cell(j + 2, 1).Value = item.Name;
+                    worksheet.Cell(j + 2, 2).Value = item.Email;
+                    worksheet.Cell(j + 2, 3).Value = item.Phone;
+                    worksheet.Cell(j + 2, 4).Value = item.Address;
+
+                    if (!string.IsNullOrWhiteSpace(item.Email))
                     {
-                        var item = itemList[j];
-                        worksheet.Cell(j + 2, 1).Value = item.Name;
-                        worksheet.Cell(j + 2, 2).Value = item.Email;
-                        worksheet.Cell(j + 2, 3).Value = item.Phone;
-                        worksheet.Cell(j + 2, 4).Value = item.Address;
+                        onlyEmailWorksheet.Cell(emailRowCounter, 1).Value = item.Name;
+                        onlyEmailWorksheet.Cell(emailRowCounter, 2).Value = item.Email;
+                        onlyEmailWorksheet.Cell(emailRowCounter, 3).Value = item.Phone;
+                        onlyEmailWorksheet.Cell(emailRowCounter, 4).Value = item.Address;
+                        emailRowCounter++;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(item.Phone))
+                    {
+                        completeDataWorksheet.Cell(phoneRowCounter, 1).Value = item.Name;
+                        completeDataWorksheet.Cell(phoneRowCounter, 2).Value = item.Email;
+                        completeDataWorksheet.Cell(phoneRowCounter, 3).Value = item.Phone;
+                        completeDataWorksheet.Cell(phoneRowCounter, 4).Value = item.Address;
+                        phoneRowCounter++;
                     }
                 }
-                // Guardar el archivo Excel
-                workbook.SaveAs(rutaArchivo);
-            }
 
-            MessageBox.Show($"Datos exportados exitosamente a Excel ({rutaArchivo})", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveExcelFile(rutaArchivo, workbook);
+            }
         }
 
         private void button3_Click_1(object sender, EventArgs e)

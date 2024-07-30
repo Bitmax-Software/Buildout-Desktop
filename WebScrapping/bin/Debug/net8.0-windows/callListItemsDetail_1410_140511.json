@@ -1,32 +1,422 @@
 [
   {
     "Name": "CORA ZACARIAS",
-    "Email": "JOHNE_ZAC@YAHOO.COM | WEQWEQWEQWE@HOTMAIL.COM | MPU12846@SSOIA.COM | Show More",
-    "Phone": "(415) 595-3489 | (415) 665-9183",
-    "Address": "2314 27TH AVE, SAN FRANCISCO, CA 94116 | 418 88TH ST, DALY CITY, CA 94015 | 5290 CABRILLO AVE, ATASCADERO, CA 93422"
+    "Email": "JOHNE_ZAC@YAHOO.COM",
+    "Phone": "(415) 595-3489",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "CORA ZACARIAS",
+    "Email": "WEQWEQWEQWE@HOTMAIL.COM",
+    "Phone": "(415) 665-9183",
+    "Address": "418 88 Th St, Daly City, CA 94015"
+  },
+  {
+    "Name": "CORA ZACARIAS",
+    "Email": "MPU12846@SSOIA.COM",
+    "Phone": "",
+    "Address": "5290 Cabrillo Ave, Atascadero, CA 93422"
+  },
+  {
+    "Name": "CORA ZACARIAS",
+    "Email": "ZAC@LIVECAPITAL.COM",
+    "Phone": "",
+    "Address": "3262 Estate Dr, Stockton, CA 95209"
   },
   {
     "Name": "BENJAMIN ZACARIAS",
-    "Email": "BZACARIAS@AOL.COM | BZACARIAS@COMCAST.NET | BZACARIASB4@AOL.COM | Show More",
-    "Phone": "(415) 846-7742 | (415) 665-9183 | (310) 836-7776",
-    "Address": "2314 27TH AVE, SAN FRANCISCO, CA 94116 | 317 28TH AVE, SAN FRANCISCO, CA 94121 | 49 LARKSPUR AVE, DALY CITY, CA 94015"
+    "Email": "BZACARIAS@AOL.COM",
+    "Phone": "(415) 846-7742",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "BENJAMIN ZACARIAS",
+    "Email": "BZACARIAS@COMCAST.NET",
+    "Phone": "(415) 665-9183",
+    "Address": "317 28 Th Ave, San Francisco, CA 94121"
+  },
+  {
+    "Name": "BENJAMIN ZACARIAS",
+    "Email": "BZACARIASB4@AOL.COM",
+    "Phone": "(310) 836-7776",
+    "Address": "49 Larkspur Ave, Daly City, CA 94015"
+  },
+  {
+    "Name": "BENJAMIN ZACARIAS",
+    "Email": "ABZACARIAS5@AOL.COM",
+    "Phone": "",
+    "Address": ""
+  },
+  {
+    "Name": "BENJAMIN ZACARIAS",
+    "Email": "BZAACARIASZ@AOL.COM",
+    "Phone": "",
+    "Address": ""
+  },
+  {
+    "Name": "BENJAMIN ZACARIAS",
+    "Email": "ROBBUZON@TELUSPLANET.NET",
+    "Phone": "",
+    "Address": ""
   },
   {
     "Name": "JAMES BAISS",
     "Email": "SEANBAISS@GMAIL.COM",
-    "Phone": "(415) 606-1801 | (415) 731-1801",
-    "Address": "15 MELBA AVE, SAN FRANCISCO, CA 94132 | 2314 27TH AVE, SAN FRANCISCO, CA 94116 | HELEN M BAISS, SAN FRANCISCO, CA 94132"
+    "Phone": "(415) 606-1801",
+    "Address": "15 Melba Ave, San Francisco, CA 94132"
+  },
+  {
+    "Name": "JAMES BAISS",
+    "Email": "",
+    "Phone": "(415) 731-1801",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
   },
   {
     "Name": "JOHN ZACARIAS",
     "Email": "JOHNE_ZAC@YAHOO.COM",
-    "Phone": "(415) 359-7255 | (415) 665-9183",
-    "Address": "1042 LAKE GLEN WAY, SACRAMENTO, CA 95822 | 2694 TRUXEL RD, SACRAMENTO, CA 95833 | 938 MARTIN TRL, DALY CITY, CA 94014"
+    "Phone": "(415) 359-7255",
+    "Address": "1042 Lake Glen Way, Sacramento, CA 95822"
+  },
+  {
+    "Name": "JOHN ZACARIAS",
+    "Email": "",
+    "Phone": "(415) 665-9183",
+    "Address": "2694 Truxel Rd, Sacramento, CA 95833"
   },
   {
     "Name": "PAULINE ROSELADA",
-    "Email": "SPINELLIE716@YAHOO.COM | PROSELADA@YAHOO.COM | SPINELLIE@YAHOO.COM | Show More",
-    "Phone": "+65 0534 5895 | +65 0534 5589 | (415) 760-7989",
-    "Address": "1042 LAKE GLEN WAY, SACRAMENTO, CA 95822 | 2694 TRUXEL RD, SACRAMENTO, CA 95833 | 2308 SHANNON DR, SOUTH SAN FRANCISCO, CA 94080"
+    "Email": "SPINELLIE716@YAHOO.COM",
+    "Phone": "+65 0534 5895",
+    "Address": "1042 Lake Glen Way, Sacramento, CA 95822"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "PROSELADA@YAHOO.COM",
+    "Phone": "+65 0534 5589",
+    "Address": "2694 Truxel Rd, Sacramento, CA 95833"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "SPINELLIE@YAHOO.COM",
+    "Phone": "(415) 760-7989",
+    "Address": "2308 Shannon Dr, South San Francisco, CA 94080"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "HPROSELADAG54@YAHOO.COM",
+    "Phone": "(415) 760-6079",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "FROSELADA@GMAIL.COM",
+    "Phone": "",
+    "Address": "938 Martin Trl, Daly City, CA 94014"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "SPINELLIE716AC6@YAHOO.COM",
+    "Phone": "",
+    "Address": "70 Oaklawn Dr Apt 8, Daly City, CA 94015"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "SPINELFUIE71636@YAHOO.COM",
+    "Phone": "",
+    "Address": "347 Chester Ave, San Francisco, CA 94132"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "PROSELBPADA57@YAHOO.COM",
+    "Phone": "",
+    "Address": "980 Holly Springs Dr, Lexington, KY 40504"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "JOHNE_ZAC@YAHOO.COM",
+    "Phone": "",
+    "Address": "4375 N 1000 Th St, Robinson, IL 62454"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "CUESMP1LL@GMX.COM",
+    "Phone": "",
+    "Address": "393 Dublin Dr, Glen Burnie, MD 21060"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "POPPYMILKSF@GMAIL.COM",
+    "Phone": "",
+    "Address": "2625 Broad St, San Luis Obispo, CA 93401"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "RAYMACEIRA@YAHOO.COM",
+    "Phone": "",
+    "Address": "1551 Southgate Ave Apt 171, Daly City, CA 94015"
+  },
+  {
+    "Name": "PAULINE ROSELADA",
+    "Email": "SPINELLIE716@CA.RR.COM",
+    "Phone": "",
+    "Address": "1000 National Ave Apt 331, San Bruno, CA 94066"
+  },
+  {
+    "Name": "JAZMINE URBAN",
+    "Email": "JAYSONURBAN415@YAHOO.COM",
+    "Phone": "(916) 825-6934",
+    "Address": "2832 Cinnamon Teal Cir, Elk Grove, CA 95757"
+  },
+  {
+    "Name": "JAZMINE URBAN",
+    "Email": "JAZMINEURBAN@YAHOO.COM",
+    "Phone": "(916) 317-4233",
+    "Address": "8858 Garrity Dr, Elk Grove, CA 95624"
+  },
+  {
+    "Name": "JAZMINE URBAN",
+    "Email": "SMOOCHESINMA@AOL.COM",
+    "Phone": "(916) 825-7811",
+    "Address": "7190 Calvine Rd Apt 1, Sacramento, CA 95823"
+  },
+  {
+    "Name": "JAZMINE URBAN",
+    "Email": "HELLAPINAI@YAHOO.COM",
+    "Phone": "",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "JOANNEPHILIPP11@YMAIL.COM",
+    "Phone": "(916) 803-3470",
+    "Address": "5756 Moddison Ave, Sacramento, CA 95819"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "JOANNEPHILIPP@YMAIL.COM",
+    "Phone": "(916) 803-3477",
+    "Address": "848 54 Th St, Sacramento, CA 95819"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "JOANNEPHILIPP47N4@YMAIL.COM",
+    "Phone": "(916) 476-4025",
+    "Address": "4500 B St, Sacramento, CA 95819"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "JOANNEPHILIPP47@YMAIL.COM",
+    "Phone": "(916) 988-1014",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "CAP_999@YAHOO.COM",
+    "Phone": "(916) 939-3306",
+    "Address": "8858 Garrity Dr, Elk Grove, CA 95624"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "AROLHILIP647@MAIL.COM",
+    "Phone": "(916) 361-7006",
+    "Address": "1147 58 Th St, Sacramento, CA 95819"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "CAROLPHILI16@HOTMAIL.COM",
+    "Phone": "(916) 361-9313",
+    "Address": "240 Natoma Station Dr Apt 103, Folsom, CA 95630"
+  },
+  {
+    "Name": "CAROL PHILIP",
+    "Email": "CPHILIP@LABORLAWYERS.COM",
+    "Phone": "+95 45 532 949",
+    "Address": "1734 38 Th St, Sacramento, CA 95816"
+  },
+  {
+    "Name": "MICHAEL ZACARIAS",
+    "Email": "CAP_999@YAHOO.COM",
+    "Phone": "(916) 295-2571",
+    "Address": "5756 Moddison Ave, Sacramento, CA 95819"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TIFFANY.MARLIN@HOTMAIL.COM",
+    "Phone": "(704) 904-2384",
+    "Address": "15130 Perthsire Ct, Huntersville, NC 28078"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "JJTIFFANY.MARLIN56@HOTMAIL.COM",
+    "Phone": "(704) 947-5338",
+    "Address": "1690 Filbert St Apt 5, San Francisco, CA 94123"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "UTIFFANY.MARLIN5@HOTMAIL.COM",
+    "Phone": "(704) 562-4985",
+    "Address": "6618 Dunton St, Huntersville, NC 28078"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TIFFANY.MARLIN@HOMESOLAR.COM",
+    "Phone": "",
+    "Address": "Po Box 387, Mount Mourne, NC 28123"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TMARLIN@MYWAY.COM",
+    "Phone": "",
+    "Address": "6150 Deveron Dr, Charlotte, NC 28211"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TMARLIN@YAHOO.COM",
+    "Phone": "",
+    "Address": "7806 Buddy Holly Rd, Charlotte, NC 28216"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TMARLIN@COMCAST.NET",
+    "Phone": "",
+    "Address": "7733 Prairie Rose Ln, Huntersville, NC 28078"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TGSGJ@JUNO.COM",
+    "Phone": "",
+    "Address": "623 Highland Ridge Rd, Mooresville, NC 28115"
+  },
+  {
+    "Name": "TIFFANY BRAY",
+    "Email": "TMARLIN@LITTLEARCH.COM",
+    "Phone": "",
+    "Address": "115 English Hills Dr, Mooresville, NC 28115"
+  },
+  {
+    "Name": "JUDD URBAN",
+    "Email": "BRANDONJURBAN@GMAIL.COM",
+    "Phone": "(916) 548-6080",
+    "Address": "8858 Garrity Dr, Elk Grove, CA 95624"
+  },
+  {
+    "Name": "JUDD URBAN",
+    "Email": "JAYSONURBAN415@YAHOO.COM",
+    "Phone": "",
+    "Address": "8740 Briskin Dr, Elk Grove, CA 95624"
+  },
+  {
+    "Name": "JUDD URBAN",
+    "Email": "SMOOCHESINMA@AOL.COM",
+    "Phone": "",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "JUDD URBAN",
+    "Email": "THOMAS.WEBB@GEOCITIES.COM",
+    "Phone": "",
+    "Address": "860 Campus Dr Apt 112, Daly City, CA 94015"
+  },
+  {
+    "Name": "JUDD URBAN",
+    "Email": "JDURBAN@OUTLOOK.COM",
+    "Phone": "",
+    "Address": "1369 14 Th Ave, San Francisco, CA 94122"
+  },
+  {
+    "Name": "GINA URBAN",
+    "Email": "JAYSONURBAN415@YAHOO.COM",
+    "Phone": "(916) 825-7811",
+    "Address": "8858 Garrity Dr, Elk Grove, CA 95624"
+  },
+  {
+    "Name": "GINA URBAN",
+    "Email": "SMOOCHESINMA@AOL.COM",
+    "Phone": "(916) 548-6080",
+    "Address": "860 Campus Dr Apt 112, Daly City, CA 94015"
+  },
+  {
+    "Name": "GINA URBAN",
+    "Email": "URBAN_6_PACK@HOTMAIL.COM",
+    "Phone": "(916) 685-0678",
+    "Address": "1369 14 Th Ave, San Francisco, CA 94122"
+  },
+  {
+    "Name": "GINA URBAN",
+    "Email": "SUB6URBAN_@AOL.COM",
+    "Phone": "",
+    "Address": "49 Larkspur Ave, Daly City, CA 94015"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIEREYES2@SBCGLOBAL.NET",
+    "Phone": "+65 0994 3843",
+    "Address": "1042 Gilman Dr, Daly City, CA 94015"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "ESSIE.REYES@GMAIL.COM",
+    "Phone": "(415) 987-1455",
+    "Address": "55 New Montgomery St Ste 720, San Francisco, CA 94105"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE.REYES@GMAIL.COM",
+    "Phone": "+65 0296 9798",
+    "Address": "609 Sutter St, San Francisco, CA 94102"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TZTUAZON@YAHOO.COM",
+    "Phone": "(415) 999-7943",
+    "Address": "42 E Moltke St, Daly City, CA 94014"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "HOTMAMACAKES2000@YAHOO.COM",
+    "Phone": "+65 0550 4901",
+    "Address": "1751 Market St Apt 6, San Francisco, CA 94103"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE_REYES@SBCGLOBAL.NET",
+    "Phone": "(415) 351-8614",
+    "Address": "659 3 Rd Ave, San Francisco, CA 94118"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE.REYES@SFROTARY.COM",
+    "Phone": "(415) 923-0645",
+    "Address": "5250 Stewart Ave Apt 2095, Las Vegas, NV 89110"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIEREYES@SBCGLOBAL.NET",
+    "Phone": "+65 0994 5699",
+    "Address": "2314 27 Th Ave, San Francisco, CA 94116"
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE_REYES@ATT.NET",
+    "Phone": "+65 0755 4550",
+    "Address": ""
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE_REYES@EPIX.NET",
+    "Phone": "+65 0794 3843",
+    "Address": ""
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "TESSIE_REYES@AOL.COM",
+    "Phone": "+62 6 589 9403",
+    "Address": ""
+  },
+  {
+    "Name": "TERESITA REYES",
+    "Email": "CKREYES@RCN.COM",
+    "Phone": "",
+    "Address": ""
   }
 ]

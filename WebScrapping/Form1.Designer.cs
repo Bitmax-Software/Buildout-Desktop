@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             comboBox1 = new ComboBox();
             button2 = new Button();
@@ -266,6 +267,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1913, 1202);
             Controls.Add(tableLayoutPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(6, 7, 6, 7);
             Name = "Form1";
             Text = "Buildout Desktop";
