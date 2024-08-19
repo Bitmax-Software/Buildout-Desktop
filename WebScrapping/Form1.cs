@@ -755,7 +755,7 @@ namespace WebScrapping
         }
 
 
-        
+
         // Función para verificar si el archivo está en uso
         private bool IsFileLocked(string filePath)
         {
@@ -922,6 +922,7 @@ namespace WebScrapping
                 var worksheet = workbook.Worksheets.Add(sheetName);
                 var onlyEmailWorksheet = workbook.Worksheets.Add("Only Emails");
                 var completeDataWorksheet = workbook.Worksheets.Add("Complete Data");
+                var onlyTwoFirstRowsWorksheet = workbook.Worksheets.Add("Main Data");
 
                 // Encabezados de columna
                 string[] headers = { "Name", "Email", "Phone", "Address" };
@@ -930,9 +931,11 @@ namespace WebScrapping
                     worksheet.Cell(1, i + 1).Value = headers[i];
                     onlyEmailWorksheet.Cell(1, i + 1).Value = headers[i];
                     completeDataWorksheet.Cell(1, i + 1).Value = headers[i];
+                    onlyTwoFirstRowsWorksheet.Cell(1, i + 1).Value = headers[i];
                 }
 
-                var data = new List<DetailListItem>();
+                var dataArray = new List<(List<DetailListItem> data, string? group)>();
+
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     var row = dataGridView.Rows[i];
@@ -945,37 +948,59 @@ namespace WebScrapping
                     };
 
                     var path = string.Format(_callListItemsDetailPath, contactList.ParentId, contactList.Id);
-                    data.AddRange(GetAllContactsItems(path));
+                    var value = (data: GetAllContactsItems(path), group: contactList.Id);
+                    dataArray.Add(value);
                 }
 
                 int emailRowCounter = 2;
                 int phoneRowCounter = 2;
+                int lastSheetRowCounter = 2;
 
-                for (int j = 0; j < data.Count; j++)
+                for (int j = 0; j < dataArray.Count; j++)
                 {
-                    var item = data[j];
-                    worksheet.Cell(j + 2, 1).Value = item.Name;
-                    worksheet.Cell(j + 2, 2).Value = item.Email;
-                    worksheet.Cell(j + 2, 3).Value = item.Phone;
-                    worksheet.Cell(j + 2, 4).Value = item.Address;
+                    var (data, group) = dataArray[j];
+                    var namesSaved = new List<string>();
 
-                    if (!string.IsNullOrWhiteSpace(item.Email))
+                    for (int k = 0; k < data.Count; k++)
                     {
-                        onlyEmailWorksheet.Cell(emailRowCounter, 1).Value = item.Name;
-                        onlyEmailWorksheet.Cell(emailRowCounter, 2).Value = item.Email;
-                        onlyEmailWorksheet.Cell(emailRowCounter, 3).Value = item.Phone;
-                        onlyEmailWorksheet.Cell(emailRowCounter, 4).Value = item.Address;
-                        emailRowCounter++;
+                        var item = data[k];
+
+                        if (namesSaved.Count < 2 && !namesSaved.Contains(item.Name))
+                            namesSaved.Add(item.Name);
+
+                        worksheet.Cell(j + 2, 1).Value = item.Name;
+                        worksheet.Cell(j + 2, 2).Value = item.Email;
+                        worksheet.Cell(j + 2, 3).Value = item.Phone;
+                        worksheet.Cell(j + 2, 4).Value = item.Address;
+
+                        if (!string.IsNullOrWhiteSpace(item.Email))
+                        {
+                            onlyEmailWorksheet.Cell(emailRowCounter, 1).Value = item.Name;
+                            onlyEmailWorksheet.Cell(emailRowCounter, 2).Value = item.Email;
+                            onlyEmailWorksheet.Cell(emailRowCounter, 3).Value = item.Phone;
+                            onlyEmailWorksheet.Cell(emailRowCounter, 4).Value = item.Address;
+                            emailRowCounter++;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(item.Phone))
+                        {
+                            completeDataWorksheet.Cell(phoneRowCounter, 1).Value = item.Name;
+                            completeDataWorksheet.Cell(phoneRowCounter, 2).Value = item.Email;
+                            completeDataWorksheet.Cell(phoneRowCounter, 3).Value = item.Phone;
+                            completeDataWorksheet.Cell(phoneRowCounter, 4).Value = item.Address;
+                            phoneRowCounter++;
+
+                            if (namesSaved.Contains(item.Name))
+                            {
+                                onlyTwoFirstRowsWorksheet.Cell(lastSheetRowCounter, 1).Value = item.Name;
+                                onlyTwoFirstRowsWorksheet.Cell(lastSheetRowCounter, 2).Value = item.Email;
+                                onlyTwoFirstRowsWorksheet.Cell(lastSheetRowCounter, 3).Value = item.Phone;
+                                onlyTwoFirstRowsWorksheet.Cell(lastSheetRowCounter, 4).Value = item.Address;
+                                lastSheetRowCounter++;
+                            }
+                        }
                     }
 
-                    if (!string.IsNullOrWhiteSpace(item.Phone))
-                    {
-                        completeDataWorksheet.Cell(phoneRowCounter, 1).Value = item.Name;
-                        completeDataWorksheet.Cell(phoneRowCounter, 2).Value = item.Email;
-                        completeDataWorksheet.Cell(phoneRowCounter, 3).Value = item.Phone;
-                        completeDataWorksheet.Cell(phoneRowCounter, 4).Value = item.Address;
-                        phoneRowCounter++;
-                    }
                 }
 
                 SaveExcelFile(rutaArchivo, workbook);
