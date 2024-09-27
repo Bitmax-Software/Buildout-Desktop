@@ -15,6 +15,7 @@ using static ClosedXML.Excel.XLPredefinedFormat;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.VisualBasic;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using System.Text;
 
 namespace WebScrapping
 {
@@ -761,6 +762,17 @@ namespace WebScrapping
         {
             try
             {
+                // Verificar si el archivo existe
+                if (!File.Exists(filePath))
+                {
+                    // Crear el archivo si no existe
+                    using (FileStream fs = File.Create(filePath))
+                    {
+
+                    }
+                }
+
+                // Intentar abrir el archivo para verificar si está bloqueado
                 using (FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
                 {
                     stream.Close();
@@ -768,10 +780,11 @@ namespace WebScrapping
             }
             catch (IOException)
             {
-                return true;
+                return true; // El archivo está bloqueado
             }
-            return false;
+            return false; // El archivo no está bloqueado
         }
+
 
         // Guardar el archivo Excel con verificación y reintento
         private void SaveExcelFile(string rutaArchivo, XLWorkbook? workbook)
@@ -855,6 +868,7 @@ namespace WebScrapping
                     completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
                     completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
                     completeDataWorksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                
                 }
 
                 int emailRowCounter = 2; // Contador para las filas de la hoja de emails
@@ -866,12 +880,14 @@ namespace WebScrapping
                 // 2 - Phone
                 // 3 - Address
 
+                var namesSaved = new List<string>();
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     var row = dataGridView.Rows[i];
                     var rowHasEmail = row.Cells[1].Value != null && !string.IsNullOrWhiteSpace(row.Cells[1].Value.ToString());
                     var rowHasPhone = row.Cells[2].Value != null && !string.IsNullOrWhiteSpace(row.Cells[2].Value.ToString());
 
+                    
                     for (int j = 0; j < dataGridView.Columns.Count; j++)
                     {
                         var cellValue = row.Cells[j].Value?.ToString();
@@ -922,7 +938,7 @@ namespace WebScrapping
                 var worksheet = workbook.Worksheets.Add(sheetName);
                 var onlyEmailWorksheet = workbook.Worksheets.Add("Only Emails");
                 var completeDataWorksheet = workbook.Worksheets.Add("Complete Data");
-                var onlyTwoFirstRowsWorksheet = workbook.Worksheets.Add("Main Data");
+                var onlyTwoFirstRowsWorksheet = workbook.Worksheets.Add("Main Data Per Contact");
 
                 // Encabezados de columna
                 string[] headers = { "Name", "Email", "Phone", "Address" };
@@ -952,6 +968,7 @@ namespace WebScrapping
                     dataArray.Add(value);
                 }
 
+                int generalRowCounter = 2;
                 int emailRowCounter = 2;
                 int phoneRowCounter = 2;
                 int lastSheetRowCounter = 2;
@@ -968,10 +985,12 @@ namespace WebScrapping
                         if (namesSaved.Count < 2 && !namesSaved.Contains(item.Name))
                             namesSaved.Add(item.Name);
 
-                        worksheet.Cell(j + 2, 1).Value = item.Name;
-                        worksheet.Cell(j + 2, 2).Value = item.Email;
-                        worksheet.Cell(j + 2, 3).Value = item.Phone;
-                        worksheet.Cell(j + 2, 4).Value = item.Address;
+                        worksheet.Cell(generalRowCounter, 1).Value = item.Name;
+                        worksheet.Cell(generalRowCounter, 2).Value = item.Email;
+                        worksheet.Cell(generalRowCounter, 3).Value = item.Phone;
+                        worksheet.Cell(generalRowCounter, 4).Value = item.Address;
+
+                        generalRowCounter++;
 
                         if (!string.IsNullOrWhiteSpace(item.Email))
                         {
